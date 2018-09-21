@@ -1,5 +1,7 @@
-import { create } from 'axios'
+import { create } from 'apisauce';
 
-const api = create({ baseURL: 'https://swapi.co/api' })
+const api = create({
+  baseURL: 'https://dev.people.com.ai/mobile/api/v2/',
+});
 
-export default api
+export default api;

@@ -1,8 +1,34 @@
-import React from 'react'
-import { Button } from 'semantic-ui-react'
+import React from 'react';
+import { Card, Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-const Home = () => <div>
-  <Button >Teste</Button>
-</div>
+import Site from './Site';
 
-export default Home
+const users = require('./Users.json');
+
+const Home = () => (
+  <Container>
+
+    <Card.Group>
+      {
+        users.map(item => (
+          <Site
+            key={item.id}
+            imageUrl={item.image}
+            empresa={item.empresa}
+            cite={item.cite}
+            email={item.email}
+            empresa={item.empresa}
+          />
+        ))
+      }
+
+    </Card.Group>
+
+  </Container>
+);
+
+const mapStateToProps = state => ({
+  people: state.people,
+});
+export default connect(mapStateToProps)(Home);

@@ -1,11 +1,11 @@
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 const localStorageMock = {
   getItem: jest.fn(),
   setItem: jest.fn(),
-  clear: jest.fn()
-}
-global.localStorage = localStorageMock
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock;
 
-configure({ adapter: new Adapter() })
+configure({ adapter: new Adapter() });
