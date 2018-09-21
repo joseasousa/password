@@ -4,8 +4,6 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import secureStorage from '../../services/secureStorage';
-
 
 import { Creators as ActionCreators } from '../../redux/store/auth';
 
