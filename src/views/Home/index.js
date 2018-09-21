@@ -18,7 +18,6 @@ const Home = () => (
             empresa={item.empresa}
             cite={item.cite}
             email={item.email}
-            empresa={item.empresa}
           />
         ))
       }
