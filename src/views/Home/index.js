@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 
 import Site from './Site';
 
-const users = require('./Users.json');
-
-const Home = () => (
+const Home = ({users}) => (
   <Container>
 
     <Card.Group>

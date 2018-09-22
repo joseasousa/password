@@ -12,6 +12,7 @@ export const { Types, Creators } = createActions({
 
 const INITIAL_STATE = {
   user: null,
+  token: '',
   loading: false,
   error: null,
   isSaving: false,
@@ -20,7 +21,7 @@ const INITIAL_STATE = {
 
 const createAuthRequest = (state = INITIAL_STATE, action) => ({
   ...state,
-  isSaving: true,
+  loading: true,
   user: action.user,
   error: false,
   errorMessage: '',
@@ -30,7 +31,7 @@ const createAuthRequest = (state = INITIAL_STATE, action) => ({
 const createSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: false,
-  user: action.user,
+  token: action.token,
   saved: true,
 });
 
@@ -39,6 +40,7 @@ const createFailure = (state = INITIAL_STATE, action) => ({
   isSaving: false,
   errorMessage: action.error,
   user: {},
+  token: '',
   saved: false,
 });
 
@@ -74,5 +76,4 @@ export default createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
-
 });

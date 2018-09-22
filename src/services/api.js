@@ -1,4 +1,4 @@
-import { create } from 'apisauce';
+import { create } from 'axios';
 
 const api = create({
   baseURL: 'https://dev.people.com.ai/mobile/api/v2/',

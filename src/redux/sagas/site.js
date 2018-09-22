@@ -1,13 +1,15 @@
 import { put } from 'redux-saga/effects';
 
-import { Creators as ActionCreator } from '../store/auth';
+import api from '../../services/api';
+
+import { Creators as ActionCreator } from '../store/site';
 
 export function* storeSite(action) {
-  const user = yield api.post('/register', action.user);
+  try {
+    const user = yield api.post('/register', action.user);
 
-  if (user.ok) {
-    yield put(ActionCreator.createSiteSuccess(user));
-  } else {
-    yield put(ActionCreator.createSiteFailure(user.data.message));
+    yield put(ActionCreator.createSiteSuccess(user.data));
+  } catch (err) {
+    yield put(ActionCreator.createSiteFailure(err.response.data.error));
   }
 }

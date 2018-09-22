@@ -76,7 +76,7 @@ class Cad extends Component {
                 placeholder="Password"
                 onChange={this.handleChange('password')}
                 type="password"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
                 required
               />
 

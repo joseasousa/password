@@ -28,13 +28,11 @@ class Cad extends Component {
    }
 
   signin = () => {
-    secureStorage.setItem(1, this.state.form);
+
   }
 
   componentDidMount() {
-    const itens = Object.keys(secureStorage)
-      .map(k => secureStorage.getItem(k));
-    console.log(itens);
+
   }
 
   render() {
