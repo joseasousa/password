@@ -3,7 +3,7 @@ import reducer,
   from '../../../redux/store/site';
 
 const INITIAL_STATE = {
-  user: null,
+  site: null,
   loading: false,
   error: null,
   isSaving: false,
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 };
 
 describe('Site Redux', () => {
-  it('should request', () => {
+  it('should request to create a Site', () => {
     const state = reducer(
       INITIAL_STATE,
       SiteActions.createSiteRequest(),
@@ -20,7 +20,7 @@ describe('Site Redux', () => {
     expect(state.isSaving).toBe(true);
   });
 
-  it('shoud request success', () => {
+  it('shoud request success to create a Site', () => {
     const state = reducer(
       INITIAL_STATE,
       SiteActions.createSiteSuccess([
@@ -28,13 +28,40 @@ describe('Site Redux', () => {
       ]),
     );
 
-    expect(state.user).toHaveLength(1);
+    expect(state.site).toHaveLength(1);
   });
 
-  it('shoud request success', () => {
+  it('shoud request error to create a Site', () => {
     const state = reducer(
       INITIAL_STATE,
       SiteActions.createSiteFailure('error'),
+    );
+
+    expect(state.errorMessage).toBe('error');
+  });
+
+  it('should request a Site', () => {
+    const state = reducer(
+      INITIAL_STATE,
+      SiteActions.siteRequest(),
+    );
+
+    expect(state.loading).toBe(true);
+  });
+
+  it('should success to Request Site', () => {
+    const state = reducer(
+      INITIAL_STATE,
+      SiteActions.createSiteSuccess([{ id: 1, name: 'test' }]),
+    );
+
+    expect(state.site).toHaveLength(1);
+  });
+
+  it('shoud error to Request Site', () => {
+    const state = reducer(
+      INITIAL_STATE,
+      SiteActions.siteFailure('error'),
     );
 
     expect(state.errorMessage).toBe('error');

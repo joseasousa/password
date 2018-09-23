@@ -19,10 +19,10 @@ describe('Auth Redux', () => {
   it('shoud request success', () => {
     const state = reducer(
       INITIAL_STATE,
-      AuthActions.createAuthSuccess([{ id: 1, name: 'test' }]),
+      AuthActions.createAuthSuccess('token'),
     );
 
-    expect(state.user).toHaveLength(1);
+    expect(state.token).toBe('token');
   });
 
   it('shoud request success', () => {

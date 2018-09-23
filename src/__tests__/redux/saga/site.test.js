@@ -54,4 +54,8 @@ describe('Site Sagas', () => {
       SiteActions.createSiteFailure('error'),
     );
   });
+
+  it('should request a Site', async () => {
+
+  });
 });

@@ -1,12 +1,16 @@
 import { createReducer, createActions } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
+  authRequest: [],
+  authSuccess: ['token'],
+  authFailure: ['error'],
+
   createAuthRequest: ['user'],
   createAuthSuccess: ['user'],
   createAuthFailure: ['error'],
 
   loginRequest: ['user'],
-  loginSuccess: ['user'],
+  loginSuccess: ['token'],
   loginFailure: ['error'],
 });
 
@@ -28,14 +32,14 @@ const createAuthRequest = (state = INITIAL_STATE, action) => ({
   saved: false,
 });
 
-const createSuccess = (state = INITIAL_STATE, action) => ({
+const createAuthSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: false,
   token: action.token,
   saved: true,
 });
 
-const createFailure = (state = INITIAL_STATE, action) => ({
+const createAuthFailure = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: false,
   errorMessage: action.error,
@@ -56,7 +60,7 @@ const loginRequest = (state = INITIAL_STATE, action) => ({
 const loginSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: false,
-  user: action.user,
+  token: action.token,
   saved: true,
 });
 
@@ -68,10 +72,38 @@ const loginFailure = (state = INITIAL_STATE, action) => ({
   saved: false,
 });
 
+const authRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  issAsigningin: true,
+  error: false,
+  errorMessage: '',
+});
+
+const authSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  token: action.token,
+  issAsigningin: false,
+  isAuth: true,
+  error: false,
+  errorMessage: '',
+});
+
+const authFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  issAsigningin: true,
+  error: false,
+  isAuth: false,
+  errorMessage: '',
+});
+
 export default createReducer(INITIAL_STATE, {
+  [Types.AUTH_REQUEST]: authRequest,
+  [Types.AUTH_SUCCESS]: authSuccess,
+  [Types.AUTH_FAILURE]: authFailure,
+
   [Types.CREATE_AUTH_REQUEST]: createAuthRequest,
-  [Types.CREATE_AUTH_SUCCESS]: createSuccess,
-  [Types.CREATE_AUTH_FAILURE]: createFailure,
+  [Types.CREATE_AUTH_SUCCESS]: createAuthSuccess,
+  [Types.CREATE_AUTH_FAILURE]: createAuthFailure,
 
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,

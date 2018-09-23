@@ -1,23 +1,53 @@
 import { createReducer, createActions } from 'reduxsauce';
 
+
 export const { Types, Creators } = createActions({
-  createSiteRequest: [],
-  createSiteSuccess: ['user'],
+  createSiteRequest: ['site'],
+  createSiteSuccess: ['site'],
   createSiteFailure: ['error'],
+
+  siteRequest: [],
+  siteSuccess: ['sites'],
+  siteFailure: ['error'],
 });
 
 const INITIAL_STATE = {
-  user: null,
+  sites: [],
+  site: {},
   loading: false,
   error: null,
   isSaving: false,
   saved: false,
 };
 
+
+const siteRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  loading: true,
+  error: false,
+  errorMessage: '',
+  saved: false,
+});
+
+const siteSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isSaving: false,
+  sites: action.sites,
+  saved: true,
+});
+
+const siteFailure = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isSaving: false,
+  errorMessage: action.error,
+  user: {},
+  saved: false,
+});
+
 const createSiteRequest = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: true,
-  user: action.user,
+  site: action.site,
   error: false,
   errorMessage: '',
   saved: false,
@@ -26,7 +56,7 @@ const createSiteRequest = (state = INITIAL_STATE, action) => ({
 const createSiteSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isSaving: false,
-  user: action.user,
+  site: action.site,
   saved: true,
 });
 
@@ -39,6 +69,11 @@ const createSiteFailure = (state = INITIAL_STATE, action) => ({
 });
 
 export default createReducer(INITIAL_STATE, {
+
+  [Types.SITE_REQUEST]: siteRequest,
+  [Types.SITE_SUCCESS]: siteSuccess,
+  [Types.SITE_FAILURE]: siteFailure,
+
   [Types.CREATE_SITE_REQUEST]: createSiteRequest,
   [Types.CREATE_SITE_SUCCESS]: createSiteSuccess,
   [Types.CREATE_SITE_FAILURE]: createSiteFailure,

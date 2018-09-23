@@ -5,15 +5,16 @@ import {
 import { connect } from 'react-redux';
 
 
-import { Creators as ActionCreators } from '../../redux/store/auth';
+import { Creators as ActionCreators } from '../../redux/store/site';
 
 class Cad extends Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        name: '',
-        email: '',
+        site: '',
+        url: '',
+        user: '',
         password: '',
       },
     };
@@ -27,8 +28,9 @@ class Cad extends Component {
      this.setState({ form });
    }
 
-  signin = () => {
-
+  cad = () => {
+    const { form } = this.state;
+    this.props.signin(form);
   }
 
   componentDidMount() {
@@ -36,7 +38,9 @@ class Cad extends Component {
   }
 
   render() {
-    const { name, email, password } = this.state;
+    const {
+      site, url, user, password,
+    } = this.state;
     return (
       <div className="login-form">
         <Grid
@@ -47,39 +51,43 @@ class Cad extends Component {
 
           <Grid.Column style={{ maxWidth: 650 }}>
             <Header as="h2" color="teal" textAlign="center">
-          Cadastro
+                Cadastrar Site
             </Header>
 
-            <Form size="large" onSubmit={this.signin}>
+            <Form size="large" onSubmit={this.cad}>
 
               <Input
                 fluid
-                icon="user"
-                value={name}
+                value={site}
                 iconPosition="left"
-                onChange={this.handleChange('name')}
-                placeholder="Nome"
+                onChange={this.handleChange('site')}
+                placeholder="Site"
                 required
               />
               <Input
                 fluid
-                icon="user"
-                value={email}
+                value={url}
                 iconPosition="left"
-                placeholder="E-mail address"
-                onChange={this.handleChange('email')}
-                type="email"
+                placeholder="Url"
+                onChange={this.handleChange('url')}
                 required
               />
+              <Input
+                fluid
+                value={user}
+                iconPosition="left"
+                placeholder="User"
+                onChange={this.handleChange('user')}
+                required
+              />
+
               <Input
                 fluid
                 value={password}
-                icon="lock"
                 iconPosition="left"
                 placeholder="Password"
                 onChange={this.handleChange('password')}
                 type="password"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required
               />
 
@@ -96,13 +104,13 @@ class Cad extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  site: state.site.site,
 });
 
 const mapDispatchToProps = dispatch => ({
-  signin: (user) => {
+  signin: (site) => {
     dispatch(
-      ActionCreators.createAuthRequest(user),
+      ActionCreators.createSiteRequest(site),
     );
   },
 });
