@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import createMockStore from 'redux-mock-store';
-import { Creators as AuthCreators } from '../../../redux/store/auth';
 
 import CadSite from '../../../views/Home/CadSite';
 
 const INITIAL_STATE = {
   user: null,
+  token: '',
+  site: '',
   loading: false,
   error: null,
   isSaving: false,

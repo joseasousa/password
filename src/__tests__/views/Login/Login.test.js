@@ -6,7 +6,7 @@ import { Creators as AuthCreators } from '../../../redux/store/auth';
 import Login from '../../../views/Login';
 
 const INITIAL_STATE = {
-  user: null,
+  token: null,
   loading: false,
   error: null,
   isSaving: false,
